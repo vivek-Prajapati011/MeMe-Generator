@@ -1,63 +1,175 @@
+/* ====== Base Reset ====== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0d0f1a;
+  --panel: #1b1f36;
+  --accent1: #ff0080;
+  --accent2: #7928ca;
+  --text: #f5f7ff;
+  --muted: #a0a7c8;
+  --border: #2d3152;
+}
+
+body, html, #root {
+  height: 100%;
+  width: 100%;
+  font-family: "Poppins", system-ui, sans-serif;
+  background: radial-gradient(circle at top left, #141832, var(--bg) 80%);
+  color: var(--text);
+}
+
+/* ====== Center the whole app ====== */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-header {
-  height:65px ;
-  width: 550px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* change to center for vertical middle */
+  padding: 20px;
+}
+
+/* ====== Header ====== */
+header {
+  width: 100%;
+  max-width: 960px;
+  margin: 16px auto;
+  padding: 14px 20px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  background-color: blueviolet;
-
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
 
-.logo {
-  height: 4em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+header .logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
 }
 
+header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ====== Controls ====== */
+.controls {
+  width: 100%;
+  max-width: 960px;
+  margin: 16px auto;
+  background: var(--panel);
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 14px;
+  align-items: end;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  width: 100%;
+}
+
+input[type="text"] {
+  background: #11152b;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  outline: none;
+  width: 100%;
+}
+
+input[type="text"]:focus {
+  border-color: var(--accent1);
+  box-shadow: 0 0 6px rgba(255,0,128,0.6);
+}
+
+/* Gradient Button */
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s ease, filter 0.2s ease;
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* Responsive: stack controls */
+@media (max-width: 720px) {
+  .controls {
+    grid-template-columns: 1fr;
+  }
+  button {
+    width: 100%;
+  }
+}
+
+/* ====== Meme Canvas ====== */
 .img-container {
+  width: 100%;
+  max-width: 960px;
+  height: 480px;       /* 👈 fixed height so image won’t overflow */
+  margin: 16px auto;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #11152b;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  width: 400px;
-  margin-top: 20px;
 }
 
 .img-container img {
-  width: 100%;
-  border-radius: 10px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;  /* 👈 always keep full meme inside box */
 }
 
+/* Meme Text */
 .img-container .top,
 .img-container .bottom {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 5px black;
+  width: calc(100% - 24px);
   text-align: center;
-  width: 90%;
-  padding: 5px;
+  font-weight: 900;
+  font-family: Impact, Arial Black, sans-serif;
+  font-size: clamp(18px, 4vw, 42px);
+  color: white;
+  text-shadow:
+    -2px -2px 0 #000,
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000;
 }
 
-.img-container .top {
-  top: 10px;
-}
-
-.img-container .bottom {
-  bottom: 10px;
-}
-
-
-
+.img-container .top { top: 12px; }
+.img-container .bottom { bottom: 12px; }
