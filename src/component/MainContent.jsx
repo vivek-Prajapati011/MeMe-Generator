@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const MainContent = () => {
   const [meme, setMeMe] = useState({
@@ -6,6 +6,20 @@ const MainContent = () => {
     topText: "sdfsd",
     bottom: "adadf",
   });
+  const[allMeme, setAllMeme] = useState("")
+
+useEffect(() => {
+  const fetchData = async () => {
+    const res = await fetch("https://api.imgflip.com/get_memes");
+    const data = await res.json();
+    console.log("Fetched Memes:", data.data.memes); 
+    setAllMeme(data.data.memes); 
+  };
+
+  fetchData();
+}, []);
+
+
   const submitHandler = (e) => {
     const value = e.target.value;
     setMeMe((prevMeme) => ({
