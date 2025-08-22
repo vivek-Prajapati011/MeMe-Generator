@@ -18,7 +18,7 @@ useEffect(() => {
 
   fetchData();
 }, []);
-z
+
 const getRandomMeme = () => {
   if (allMeme.length > 0) {
     const randomIndex = Math.floor(Math.random() * allMeme.length);
