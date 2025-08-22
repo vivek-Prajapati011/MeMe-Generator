@@ -18,7 +18,18 @@ useEffect(() => {
 
   fetchData();
 }, []);
-
+z
+const getRandomMeme = () => {
+  if (allMeme.length > 0) {
+    const randomIndex = Math.floor(Math.random() * allMeme.length);
+    const url = allMeme[randomIndex].url;
+    console.log("Random Meme Picked:", allMeme[randomIndex]); // 👈 log single meme
+    setMeMe((prevMeme) => ({
+      ...prevMeme,
+      imgurl: url,
+    }));
+  }
+};
 
   const submitHandler = (e) => {
     const value = e.target.value;
@@ -40,7 +51,7 @@ useEffect(() => {
           Bottom Text
           <input type="text" name="Bottom Text" />
         </label>
-        <button>Get New MeMe Images</button>
+        <button onClick={getRandomMeme}>Get New MeMe Images</button>
         <div className="img-container">
           <img src={meme.imgurl} />
           <span className="top">{meme.topText}</span>
